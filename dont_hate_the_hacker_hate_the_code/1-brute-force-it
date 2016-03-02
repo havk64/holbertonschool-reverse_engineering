@@ -1,0 +1,15 @@
+#!/bin/bash
+cp a.out cr4ckme;
+strings cr4ckme > myStrings;
+while read line
+do
+	cp cr4ckme newTry;
+	#echo "Trying password: "$line;
+	result=$((./newTry $line )2>&1);
+	if [ -n "$result" ]
+	then
+		echo "The password is:=> "\"$line\";
+		echo $result;
+		break;
+	fi
+done < myStrings;
